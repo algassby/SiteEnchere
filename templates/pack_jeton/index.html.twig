@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PackJeton index{% endblock %}
+
+{% block body %}
+    <h1>PackJeton index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NbJetons</th>
+                <th>Descrption</th>
+                <th>Prix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pack_jeton in pack_jetons %}
+            <tr>
+                <td>{{ pack_jeton.id }}</td>
+                <td>{{ pack_jeton.nbJetons }}</td>
+                <td>{{ pack_jeton.descrption }}</td>
+                <td>{{ pack_jeton.prix }}</td>
+                <td>
+                    <a href="{{ path('pack_jeton_show', {'id': pack_jeton.id}) }}">show</a>
+                    <a href="{{ path('pack_jeton_edit', {'id': pack_jeton.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('pack_jeton_new') }}">Create new</a>
+{% endblock %}

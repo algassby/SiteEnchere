@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}HistoriqueEnchere index{% endblock %}
+
+{% block body %}
+    <h1>HistoriqueEnchere index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date_enchere</th>
+                <th>Prix</th>
+                <th>Utilisateur</th>
+                <th>Enchere</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for historique_enchere in historique_encheres %}
+            <tr>
+                <td>{{ historique_enchere.id }}</td>
+                <td>{{ historique_enchere.dateEnchere ? historique_enchere.dateEnchere|date('Y-m-d') : '' }}</td>
+                <td>{{ historique_enchere.prix }}</td>
+                <td>{{ historique_enchere.utilisateur }}</td>
+                <td>{{ historique_enchere.enchere }}</td>
+                <td>
+                    <a href="{{ path('historique_enchere_show', {'id': historique_enchere.id}) }}">show</a>
+                    <a href="{{ path('historique_enchere_edit', {'id': historique_enchere.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('historique_enchere_new') }}">Create new</a>
+{% endblock %}
