@@ -21,23 +21,29 @@ class Produit
 
     /**
      * @ORM\Column(type="string", length=50)
+     * * @Assert\Length(min="5", max="200")
+     *@Assert\Type("string")
      */
     private $reference;
 
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\Length(min="10", minMessage="10")
+     * @Assert\Type("string")
      */
     private $descriptif;
 
     /**
      * @ORM\Column(type="float")
      * @Assert\Positive(message="uniquement chiffre positif")
+     * @Assert\Type("float")
      */
     private $prix;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * * @Assert\Length(min="5", max="200")
+     * @Assert\Type("string")
      */
     private $image;
 

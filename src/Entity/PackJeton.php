@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PackJetonRepository")
  */
@@ -20,16 +20,20 @@ class PackJeton
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Positive
+     *
      */
     private $nbJetons;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\Length(min="5", max="200")
      */
     private $descrption;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\Positive
      */
     private $prix;
 

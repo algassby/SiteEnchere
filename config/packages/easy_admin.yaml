@@ -3,3 +3,6 @@ easy_admin:
     Utilisateur:
       class: App\Entity\Utilisateur
       controller: App\Controller\UtilisateurController
+      Enchere:
+        class: App\Entity\Enchere
+        controller: App\Controller\EnchereController

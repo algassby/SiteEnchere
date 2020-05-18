@@ -67,13 +67,14 @@ class UtilisateurController extends EasyAdminController
     /**
      * @Route("/new", name="utilisateur_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, UtilisateurControlleur $encoder): Response
     {
         $utilisateur = new Utilisateur();
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $encoder->encodePassword($utilisateur, $utilisateur->getPassword());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($utilisateur);
             $entityManager->flush();
