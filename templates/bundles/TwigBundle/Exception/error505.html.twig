@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="jumbotron text-center">
+            <h1 class="block">Oops! la page est introuvable</h1>
+            <h2 class="block">Le serveur retourne "{{ status_code }} {{ status_text }}".</h2>
+            <p>Services non disponible, nous sommes désolé , veuillez révenir ulterièrement</p>
+
+
+            <p class="block mt-5"><a href="{{ path("index") }}" class="btn btn-primary mr-5">Acceuil</a><a href="{{ path("index") }}" class="btn btn-success">Contact</a></p>
+        </div>
+    </div>
+{% endblock %}

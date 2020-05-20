@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="jumbotron text-center">
+            <h1 class="block">Oops! accès interdit</h1>
+            <h2 class="block">" {{ status_code }} {{ status_text }}".</h2>
+            <h3>vous avez la permission d'accedez à cette page</h3>
+
+
+
+            <p class="block mt-5"><a href="{{ path("index") }}" class="btn btn-primary mr-5">Acceuil</a><a href="{{ path("index") }}" class="btn btn-success">Contact</a></p>
+        </div>
+    </div>
+{% endblock %}
