@@ -10,6 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Numero</th>
+                <th>Produit</th>
                 <th>Date_debut</th>
                 <th>Date_fin</th>
                 <th>actions</th>
@@ -20,6 +21,7 @@
             <tr>
                 <td>{{ enchere.id }}</td>
                 <td>{{ enchere.numero }}</td>
+                <td>{{ enchere.produit }}</td>
                 <td>{{ enchere.dateDebut ? enchere.dateDebut|date('Y-m-d') : '' }}</td>
                 <td>{{ enchere.dateFin ? enchere.dateFin|date('Y-m-d') : '' }}</td>
                 <td>

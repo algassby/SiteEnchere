@@ -3,24 +3,30 @@
 {% block title %}Achat{% endblock %}
 
 {% block body %}
-    <h1>Achat</h1>
+    <div class="container">
+    <h1>Achat<a href="{{ path('achat_index') }}" class="btn btn-primary float-right mr-3 mt-3 mb-3">retour à la liste</a></h1>
 
     <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ achat.id }}</td>
+                <th>Utilisateur</th>
+                <th>PackJeton</th>
+                <th>Date_achat</th>
+                <th>Action</th>
+
             </tr>
             <tr>
-                <th>Date_achat</th>
+                <td>{{ achat.id }}</td>
+                <td>{{ achat.utilisateur }}</td>
+                <td>{{ achat.packJeton }}</td>
                 <td>{{ achat.dateAchat ? achat.dateAchat|date('Y-m-d') : '' }}</td>
+                <td class=""> <a href="{{ path('achat_edit', {'id': achat.id}) }}" class="btn btn-success">modifier</a></td>
+
             </tr>
+
         </tbody>
     </table>
-
-    <a href="{{ path('achat_index') }}">back to list</a>
-
-    <a href="{{ path('achat_edit', {'id': achat.id}) }}">edit</a>
-
-    {{ include('achat/_delete_form.html.twig') }}
+    <p class="float-right">{{ include('achat/_delete_form.html.twig') }}</p>
+    </div>
 {% endblock %}

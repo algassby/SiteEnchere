@@ -3,13 +3,15 @@
 {% block title %}Achat index{% endblock %}
 
 {% block body %}
-    <h1>Achat index</h1>
+    <div class="jumbotron">
+    <h1 class="bg-dark d-block text-white">La liste des achats</h1>
 
-    <table class="table">
+    <table class="table jumbotron">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Date_achat</th>
+                <th>Utilisateur</th>
                 <th>Pack Jeton</th>
                 <th>actions</th>
             </tr>
@@ -19,10 +21,11 @@
             <tr>
                 <td>{{ achat.id }}</td>
                 <td>{{ achat.dateAchat ? achat.dateAchat|date('Y-m-d') : '' }}</td>
+                <td>{{ achat.utilisateur }}</td>
                 <td>{{ achat.packJeton }}</td>
-                <td>
-                    <a href="{{ path('achat_show', {'id': achat.id}) }}">show</a>
-                    <a href="{{ path('achat_edit', {'id': achat.id}) }}">edit</a>
+                <td class="d-block d-md-block display-4">
+                    <a href="{{ path('achat_show', {'id': achat.id}) }}" class="btn btn-primary">Voir</a>
+                    <a href="{{ path('achat_edit', {'id': achat.id}) }}" class="btn btn-success mr-3">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +36,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('achat_new') }}">Create new</a>
+    <a href="{{ path('achat_new') }}" class="btn btn-primary">Creation achat</a>
+    </div>
 {% endblock %}

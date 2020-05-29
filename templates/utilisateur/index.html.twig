@@ -3,37 +3,45 @@
 {% block title %}Utilisateur index{% endblock %}
 
 {% block body %}
-    <h1>Utilisateur index</h1>
+    <div class="container ml-2">
+        <div class="row m-auto">
+            <div class="col-md-8 col-sm-4 col-xs-4 text-wrap ">
+                <h1>Utilisateur</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for utilisateur in utilisateurs %}
-            <tr>
-                <td>{{ utilisateur.id }}</td>
-                <td>{{ utilisateur.email }}</td>
-                <td>{{ utilisateur.roles ? utilisateur.roles|json_encode : '' }}</td>
-                <td>{{ utilisateur.password }}</td>
-                <td>
-                    <a href="{{ path('utilisateur_show', {'id': utilisateur.id}) }}">show</a>
-                    <a href="{{ path('utilisateur_edit', {'id': utilisateur.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                <table class="table display" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Email</th>
+                        <th>Roles</th>
+                        <th>Password</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for utilisateur in utilisateurs %}
+                        <tr class="text-wrap">
+                            <td>{{ utilisateur.id }}</td>
+                            <td>{{ utilisateur.email }}</td>
+                            <td>{{ utilisateur.roles ? utilisateur.roles|json_encode : '' }}</td>
+                            <td>{{ utilisateur.password }}</td>
+                            <td>
+                                <a href="{{ path('utilisateur_show', {'id': utilisateur.id}) }}">show</a>
+                                <a href="{{ path('utilisateur_edit', {'id': utilisateur.id}) }}">edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
 
-    <a href="{{ path('utilisateur_new') }}">Create new</a>
+                <a href="{{ path('utilisateur_new') }}">Create new</a>
+            </div>
+
+        </div>
+
+    </div>
 {% endblock %}

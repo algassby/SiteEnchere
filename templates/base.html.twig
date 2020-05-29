@@ -6,6 +6,7 @@
     {% block stylesheets %}
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"/>
         <link href="{{ asset('css/dataTables.min.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('jquery.dataTables.min.css') }}" rel="stylesheet"/>
     {% endblock %}
 </head>
 <body>
@@ -16,13 +17,16 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ path('index') }}">Home
+                        <a class="nav-link" href="{{ path('index') }}">Acceuil
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
+                    {% if app.user %}
+
                     <li class="nav-item">
                         <a class="nav-link" href="{{path('utilisateur_index')}}">Utilisateur</a>
                     </li>
@@ -42,12 +46,16 @@
                     <li class="nav-item">
                         <a class="nav-link"  href="{{ path('historique_enchere_index') }}">Historique Enchere</a>
                     </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('utilisateur_new')}}">Creer votre compte</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link"  href="{{ path('app_login') }}">Log in</a>
-
                     </li>
 
                 </ul>
+                {% endif %}
 
             </div>
         </div>
