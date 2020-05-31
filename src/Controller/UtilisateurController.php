@@ -17,43 +17,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UtilisateurController extends EasyAdminController
 {
-    /**
-     * @var UserPasswordEncoderInterface
-     */
-    private $passwordEncoder;
 
-    /**
-     * UserController constructor.
-     *
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     */
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
-    {
-        $this->passwordEncoder = $passwordEncoder;
-    }
-
-    public function persistEntity($entity)
-    {
-        $this->encodePassword($entity);
-        parent::persistEntity($entity);
-    }
-
-    public function updateEntity($entity)
-    {
-        $this->encodePassword($entity);
-        parent::updateEntity($entity);
-    }
-
-    public function encodePassword($user)
-    {
-        if (!$user instanceof Utilisateur) {
-            return;
-        }
-
-        $user->setPassword(
-            $this->passwordEncoder->encodePassword($user, $user->getPassword())
-        );
-    }
     /**
      * @Route("/", name="utilisateur_index", methods={"GET"})
      */
@@ -67,14 +31,14 @@ class UtilisateurController extends EasyAdminController
     /**
      * @Route("/new", name="utilisateur_new", methods={"GET","POST"})
      */
-    public function new(Request $request, UtilisateurControlleur $encoder): Response
+    public function new(Request $request,  UserPasswordEncoderInterface $encoder): Response
     {
         $utilisateur = new Utilisateur();
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $encoder->encodePassword($utilisateur, $utilisateur->getPassword());
+            $utilisateur->setPassword($encoder->encodePassword($utilisateur, $utilisateur->getPassword()));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($utilisateur);
             $entityManager->flush();
@@ -101,12 +65,14 @@ class UtilisateurController extends EasyAdminController
     /**
      * @Route("/{id}/edit", name="utilisateur_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Utilisateur $utilisateur): Response
+    public function edit(Request $request, Utilisateur $utilisateur, UserPasswordEncoderInterface $encoder): Response
     {
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $utilisateur->setPassword($encoder->encodePassword($utilisateur, $utilisateur->getPassword()));
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('utilisateur_index');
